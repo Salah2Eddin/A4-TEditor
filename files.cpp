@@ -1,7 +1,5 @@
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <iostream>
+#include <bits/stdc++.h>
+#include "files.h"
 
 using namespace std;
 

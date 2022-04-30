@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-#include "files.cpp"
+#include "editor.h"
+#include "files.h"
 
 using namespace std;
 
@@ -9,18 +10,6 @@ string mainFile;
 void main_loop_operations_prints();
 
 void main_loop();
-
-//-----------------
-void merge_file(const string &filename1, const string &filename2);
-
-unsigned long long count_words_in_file(const string &filename);
-
-unsigned long long count_characters_in_file(const string &filename);
-
-unsigned long long count_lines_in_file(const string &filename);
-
-bool check_word_exists(const string &filename, string word);
-//-----------------
 
 int main() {
     cout << "Welcome to TEditor!" << endl;
@@ -74,29 +63,37 @@ void main_loop() {
         cout << "Operation No.";
         cin >> operation;
         switch (operation) {
-            case 1:
-                break;
             case 6: {
                 string filename2;
                 cout << "Please enter second file name: ";
                 cin >> filename2;
+
+                if (filename2.size() < 4 || filename2.compare(filename2.size() - 4, 4, ".txt") != 0) {
+                    filename2 += ".txt";
+                }
+
+                while (!is_file(filename2)) {
+                    cout << "This file doesn't exist!" << endl;
+                    cout << "Please enter second file name: ";
+                    cin >> filename2;
+                }
                 merge_file(mainFile, filename2);
                 break;
             }
             case 7: {
-                unsigned long long size = 0;
+                unsigned long long size;
                 size = count_words_in_file(mainFile);
                 cout << "Number of words in file: " << size << endl;
                 break;
             }
             case 8: {
-                unsigned long long size = 0;
+                unsigned long long size;
                 size = count_characters_in_file(mainFile);
                 cout << "Number of characters in file: " << size << endl;
                 break;
             }
             case 9: {
-                unsigned long long size = 0;
+                unsigned long long size;
                 size = count_lines_in_file(mainFile);
                 cout << "Number of lines in file: " << size << endl;
                 break;
@@ -122,79 +119,4 @@ void main_loop() {
             }
         }
     }
-}
-
-//-----------------
-
-/* Appends a file content to another */
-void merge_file(const string &filename1, const string &filename2) {
-    string file2Content = read_file(filename2);
-    append_file(filename1, file2Content);
-}
-
-/* Gets number of words in a file
- * a word is a piece of text that is separated by any whitespace character (space, tab, newline) */
-unsigned long long count_words_in_file(const string &filename) {
-    stringstream stream;
-    stream << read_file(filename);
-
-    string curWord;
-    unsigned long long count = 0;
-    while (stream >> curWord) {
-        count++;
-    }
-    return count;
-}
-
-/* Gets number of characters in a file */
-unsigned long long count_characters_in_file(const string &filename) {
-    stringstream stream;
-    stream << read_file(filename);
-
-    string curWord;
-    unsigned long long count = 0;
-    while (stream >> curWord) {
-        count += curWord.length();
-        char nextChar = stream.peek();
-        if (isspace(nextChar) && nextChar != '\n') {
-            count++;
-        }
-    }
-    return count;
-}
-
-/* Gets number of lines in a file */
-unsigned long long count_lines_in_file(const string &filename) {
-    stringstream stream;
-    stream << read_file(filename);
-
-    string curWord;
-    unsigned long long count = 0;
-    while (stream >> curWord) {
-        char nextChar = stream.peek();
-        if (nextChar == '\n') {
-            count++;
-        }
-    }
-    return count;
-}
-
-/* Checks if word exists in file */
-bool check_word_exists(const string &filename, string word) {
-    stringstream stream;
-    stream << read_file(filename);
-
-    for(auto &c : word){
-        c = (char)tolower(c);
-    }
-
-    string curWord;
-    while (stream >> curWord) {
-        for(auto &c : curWord){
-            c = (char)tolower(c);
-        }
-        if (curWord == word)
-            return true;
-    }
-    return false;
 }
