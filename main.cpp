@@ -5,6 +5,7 @@
 using namespace std;
 
 string mainFile;
+string curText;
 
 //-----------------
 void main_loop_operations_prints();
@@ -22,6 +23,7 @@ int main() {
     }
 
     if (is_file(mainFile)) {
+        curText = read_file(mainFile);
         main_loop();
     } else {
         cout << "Your file doesn't exist. I created it for you." << endl;
@@ -78,23 +80,24 @@ void main_loop() {
                     cin >> filename2;
                 }
                 merge_file(mainFile, filename2);
+                curText = read_file(mainFile);
                 break;
             }
             case 7: {
                 unsigned long long size;
-                size = count_words_in_file(mainFile);
+                size = count_words(curText);
                 cout << "Number of words in file: " << size << endl;
                 break;
             }
             case 8: {
                 unsigned long long size;
-                size = count_characters_in_file(mainFile);
+                size = count_characters(curText);
                 cout << "Number of characters in file: " << size << endl;
                 break;
             }
             case 9: {
                 unsigned long long size;
-                size = count_lines_in_file(mainFile);
+                size = count_lines(curText);
                 cout << "Number of lines in file: " << size << endl;
                 break;
             }
@@ -102,7 +105,7 @@ void main_loop() {
                 string word;
                 cout << "Word:";
                 cin >> word;
-                if (check_word_exists(mainFile, word)) {
+                if (check_word_exists(curText, word)) {
                     cout << "Word was found in the file." << endl;
                 } else {
                     cout << "Word was not found in the file." << endl;
