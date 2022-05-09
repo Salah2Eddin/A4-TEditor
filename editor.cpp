@@ -3,6 +3,71 @@
 #include "editor.h"
 
 using namespace std;
+void Add_to file(const string &filename, const string &text){
+          cin.ignore();
+          getline(cin ,text,'\n');
+          filename<<text;
+}
+void Display_the content(const string &filename){
+     stringstream stream ;
+            while(getline(filename,stream)){
+               cout<<stream<<endl;
+            }
+}
+void Empty (){
+     myFile.open(File ,ios:: out |  ios::trunc);
+}
+void Encrypt (){
+    myFile.open(File , ios::in);
+    if(myFile.is_open()){
+               string line , allFile;
+               while(getline(myFile,line)){
+                 allFile +=line;
+                 allFile +='\n';
+               }
+               myFile.close();
+               myFile.open(File , ios::out);
+               string encrypt;
+                   for(int i = 0 ; i<allFile.size(); i++){
+                        if(allFile[i] == '\n'){
+                            encrypt +='\n';
+                        }else{
+                       char e = allFile[i]+1;
+                       encrypt+=e;
+
+                        }
+               }
+
+                         myFile<<encrypt<<endl;
+                         myFile.close();
+    }
+}
+void Decrypt (){
+     myFile.open(File , ios::in);
+    if(myFile.is_open()){
+               string line , allFile;
+               while(getline(myFile,line)){
+                 allFile +=line;
+                 allFile +='\n';
+               }
+               myFile.close();
+               myFile.open(File , ios::out);
+               string encrypt;
+                   for(int i = 0 ; i<allFile.size(); i++){
+                        if(allFile[i] == '\n'){
+                            encrypt +='\n';
+                        }else{
+                       char e = allFile[i]-1;
+                       encrypt+=e;
+
+                        }
+               }
+
+                         myFile<<encrypt<<endl;
+                         myFile.close();
+    }
+}
+
 
 /* Appends a file content to another */
 void merge_file(const string &filename1, const string &filename2) {
