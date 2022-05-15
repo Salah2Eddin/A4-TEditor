@@ -4,7 +4,11 @@
 #include <string>
 
 using namespace std;
-
+void add_to_file(const string &filename,const string &text);
+void Display_the_content(const string &filename);
+void empty_file(const string &filename);
+void Encrypt_file (const string &filename);
+void Decrypt_file(const string &filename);
 /* Appends a file content to another */
 void merge_file(const string &filename1, const string &filename2);
 

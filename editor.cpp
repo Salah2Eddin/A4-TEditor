@@ -3,31 +3,34 @@
 #include "editor.h"
 
 using namespace std;
-/*
-void Add_to_file(const string &filename, const string &text){
-          cin.ignore();
-          getline(cin ,text,'\n');
-          filename<<text;
+/* add new text at the end of the file */
+void add_to_file(const string &filename, const string &text) {
+    ofstream stream(filename, ios::app);
+    stream<<text;
+    stream.close();
 }
+/* display the content of the file */
 void Display_the_content(const string &filename){
-     stringstream stream ;
-            while(getline(filename,stream)){
-               cout<<stream<<endl;
-            }
+  fstream stream(filename, ios::in);
+        string line;
+           while(getline(stream,line)){
+               cout<<line<<endl;
+                }
 }
-void Empty (){
-     myFile.open(File ,ios:: out |  ios::trunc);
+/* clear the file */
+void empty_file(const string &filename){
+    ofstream stream(filename, ios::out | ios::trunc);
 }
-void Encrypt (){
-    myFile.open(File , ios::in);
-    if(myFile.is_open()){
-               string line , allFile;
-               while(getline(myFile,line)){
+/* encrypt the file */
+void Encrypt_file (const string &filename){
+   fstream stream(filename, ios::in);
+    string line , allFile;
+    while(getline(stream,line)){
                  allFile +=line;
                  allFile +='\n';
                }
-               myFile.close();
-               myFile.open(File , ios::out);
+              stream.close();
+               fstream file(filename , ios::out);
                string encrypt;
                    for(int i = 0 ; i<allFile.size(); i++){
                         if(allFile[i] == '\n'){
@@ -39,37 +42,34 @@ void Encrypt (){
                         }
                }
 
-                         myFile<<encrypt<<endl;
-                         myFile.close();
+                         stream<<encrypt<<endl;
+                         stream.close();
     }
-}
-void Decrypt (){
-     myFile.open(File , ios::in);
-    if(myFile.is_open()){
-               string line , allFile;
-               while(getline(myFile,line)){
-                 allFile +=line;
-                 allFile +='\n';
-               }
-               myFile.close();
-               myFile.open(File , ios::out);
-               string encrypt;
-                   for(int i = 0 ; i<allFile.size(); i++){
-                        if(allFile[i] == '\n'){
-                            encrypt +='\n';
-                        }else{
-                       char e = allFile[i]-1;
-                       encrypt+=e;
-
-                        }
-               }
-
-                         myFile<<encrypt<<endl;
-                         myFile.close();
+/* decrypt the file*/
+void Decrypt_file(const string &filename){
+    fstream stream(filename, ios::in);
+    string line , allFile;
+    while(getline(stream,line)){
+        allFile +=line;
+        allFile +='\n';
     }
+    stream.close();
+    fstream file(filename , ios::out);
+    string encrypt;
+    for(int i = 0 ; i<allFile.size(); i++){
+        if(allFile[i] == '\n'){
+            encrypt +='\n';
+        }else{
+            char e = allFile[i]-1;
+            encrypt+=e;
+
+        }
+    }
+
+    stream<<encrypt<<endl;
+    stream.close();
 }
 
-*/
 
 /* Appends a file content to another */
 void merge_file(const string &filename1, const string &filename2) {
