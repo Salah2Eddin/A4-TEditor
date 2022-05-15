@@ -65,6 +65,31 @@ void main_loop() {
         cout << "Operation No.";
         cin >> operation;
         switch (operation) {
+           case 1: {
+                string text;
+                cout << "Enter your text:";
+                cin.ignore();
+                getline(cin, text, '\n');
+                add_to_file(mainFile, text);
+
+                break;
+            }
+            case 2:{
+                Display_the_content(mainFile);
+                break;
+            }
+            case 3:{
+                empty_file(mainFile);
+                break;
+            }
+            case 4:{
+                 Encrypt_file(mainFile);
+                 break;
+            }
+            case 5 :{
+                 Decrypt_file(mainFile);
+                 break;
+            }
             case 6: {
                 string filename2;
                 cout << "Please enter second file name: ";
