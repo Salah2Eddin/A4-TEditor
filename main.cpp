@@ -112,6 +112,37 @@ void main_loop() {
                 }
                 break;
             }
+            case 11: {
+                string word;
+                unsigned long long size;
+                cout << "Word:";
+                cin >> word;
+                size = count_word(curText, word);
+                cout << "The word repeated: " << size << " times" << endl;
+                break;
+            }
+            case 12: {
+                curText = text_to_upper(curText);
+                cout << "Text transformed to upper" << endl;
+                break;
+            }
+            case 13: {
+                curText = text_to_lower(curText);
+                cout << "Text transformed to lower" << endl;
+
+                break;
+            }
+            case 14: {
+                curText = text_to_camel(curText);
+                cout << "Text transformed to camelcase" << endl;
+
+                break;
+            }
+            case 15: {
+                overwrite_file(mainFile, curText);
+                break;
+            }
+
             case 16: {
                 loop = false;
                 break;

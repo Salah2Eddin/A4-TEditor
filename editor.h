@@ -21,4 +21,11 @@ unsigned long long count_lines(const string &text);
 /* Checks if word exists in file */
 bool check_word_exists(const string &text, string word);
 
+string text_to_upper(string &text);
+
+string text_to_lower(string &text);
+
+string text_to_camel(string &text);
+
+int count_word(const string &text, string word);
 #endif
