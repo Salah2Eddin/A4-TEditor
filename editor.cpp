@@ -23,44 +23,22 @@ void empty_file(const string &filename){
 }
 /* encrypt the file */
 void Encrypt_file (const string &filename){
-   fstream stream(filename, ios::in);
-    string line , allFile;
-    while(getline(stream,line)){
-                 allFile +=line;
-                 allFile +='\n';
-               }
-              stream.close();
-               fstream file(filename , ios::out);
-               string encrypt;
-                   for(int i = 0 ; i<allFile.size(); i++){
-                        if(allFile[i] == '\n'){
-                            encrypt +='\n';
-                        }else{
-                       char e = allFile[i]+1;
-                       encrypt+=e;
 
-                        }
-               }
-
-                         stream<<encrypt<<endl;
-                         stream.close();
-    }
-/* decrypt the file*/
-void Decrypt_file(const string &filename){
-    fstream stream(filename, ios::in);
+    fstream stream;
+    stream.open(filename, ios::in);
     string line , allFile;
     while(getline(stream,line)){
         allFile +=line;
         allFile +='\n';
     }
     stream.close();
-    fstream file(filename , ios::out);
+    stream.open(filename , ios::out);
     string encrypt;
     for(int i = 0 ; i<allFile.size(); i++){
         if(allFile[i] == '\n'){
             encrypt +='\n';
         }else{
-            char e = allFile[i]-1;
+            char e = allFile[i]+1;
             encrypt+=e;
 
         }
@@ -68,6 +46,32 @@ void Decrypt_file(const string &filename){
 
     stream<<encrypt<<endl;
     stream.close();
+    }
+/* decrypt the file*/
+void Decrypt_file(const string &filename){
+    fstream stream;
+    stream.open(filename, ios::in);
+    string line , allFile;
+    while(getline(stream,line)){
+        allFile +=line;
+        allFile +='\n';
+    }
+    stream.close();
+    stream.open(filename , ios::out);
+    string decrypt;
+    for(int i = 0 ; i<allFile.size(); i++){
+        if(allFile[i] == '\n'){
+            decrypt +='\n';
+        }else{
+            char e = allFile[i]-1;
+            decrypt+=e;
+
+        }
+    }
+
+    stream<<decrypt<<endl;
+    stream.close();
+
 }
 
 
