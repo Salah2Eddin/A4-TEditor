@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Users\MorGan\Documents\GitHub\A4-TEditor Select CMakeLists.txt
