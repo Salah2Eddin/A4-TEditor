@@ -90,7 +90,7 @@ void main_loop() {
                 break;
             }
             case 5 : {
-                curText = encrypt_text(curText);
+                curText = decrypt_text(curText);
                 overwrite_file(mainFile, curText);
                 break;
             }
