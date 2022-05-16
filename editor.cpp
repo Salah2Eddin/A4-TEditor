@@ -3,75 +3,57 @@
 #include "editor.h"
 
 using namespace std;
+
 /* add new text at the end of the file */
-void add_to_file(const string &filename, const string &text) {
+void add_to_file(const string &filename, const string &text, bool isEmpty) {
     ofstream stream(filename, ios::app);
-    stream<<text;
+    if(isEmpty)
+        stream << text;
+    else
+        stream << "\n" << text;
     stream.close();
 }
+
 /* display the content of the file */
-void Display_the_content(const string &filename){
-  fstream stream(filename, ios::in);
-        string line;
-           while(getline(stream,line)){
-               cout<<line<<endl;
-                }
+void display_file_content(const string &filename) {
+    fstream stream(filename, ios::in);
+    string line;
+    while (getline(stream, line)) {
+        cout << line << endl;
+    }
 }
+
 /* clear the file */
-void empty_file(const string &filename){
+void empty_file(const string &filename) {
     ofstream stream(filename, ios::out | ios::trunc);
 }
+
 /* encrypt the file */
-void Encrypt_file (const string &filename){
-
-    fstream stream;
-    stream.open(filename, ios::in);
-    string line , allFile;
-    while(getline(stream,line)){
-        allFile +=line;
-        allFile +='\n';
-    }
-    stream.close();
-    stream.open(filename , ios::out);
+string encrypt_text(const string &text) {
     string encrypt;
-    for(int i = 0 ; i<allFile.size(); i++){
-        if(allFile[i] == '\n'){
-            encrypt +='\n';
-        }else{
-            char e = allFile[i]+1;
-            encrypt+=e;
-
+    for (char i: text) {
+        if (i == '\n') {
+            encrypt += '\n';
+        } else {
+            char e = i + 1;
+            encrypt += e;
         }
     }
+    return encrypt;
+}
 
-    stream<<encrypt<<endl;
-    stream.close();
-    }
 /* decrypt the file*/
-void Decrypt_file(const string &filename){
-    fstream stream;
-    stream.open(filename, ios::in);
-    string line , allFile;
-    while(getline(stream,line)){
-        allFile +=line;
-        allFile +='\n';
-    }
-    stream.close();
-    stream.open(filename , ios::out);
+string decrypt_text(const string &text) {
     string decrypt;
-    for(int i = 0 ; i<allFile.size(); i++){
-        if(allFile[i] == '\n'){
-            decrypt +='\n';
-        }else{
-            char e = allFile[i]-1;
-            decrypt+=e;
-
+    for (char i: text) {
+        if (i == '\n') {
+            decrypt += '\n';
+        } else {
+            char e = i - 1;
+            decrypt += e;
         }
     }
-
-    stream<<decrypt<<endl;
-    stream.close();
-
+    return decrypt;
 }
 
 
@@ -116,7 +98,6 @@ unsigned long long count_characters(const string &text) {
 unsigned long long count_lines(const string &text) {
     stringstream stream;
     stream << text;
-
     string curWord;
     unsigned long long count = 0;
     while (stream >> curWord) {

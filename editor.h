@@ -4,11 +4,18 @@
 #include <string>
 
 using namespace std;
-void add_to_file(const string &filename,const string &text);
-void Display_the_content(const string &filename);
+
+/* add new text at the end of the file */
+void add_to_file(const string &filename, const string &text, bool isEmpty) ;
+
+void display_file_content(const string &filename);
+
 void empty_file(const string &filename);
-void Encrypt_file (const string &filename);
-void Decrypt_file(const string &filename);
+
+string encrypt_text(const string &text);
+
+string decrypt_text(const string &text);
+
 /* Appends a file content to another */
 void merge_file(const string &filename1, const string &filename2);
 
@@ -32,4 +39,5 @@ string text_to_lower(string &text);
 string text_to_camel(string &text);
 
 int count_word(const string &text, string word);
+
 #endif

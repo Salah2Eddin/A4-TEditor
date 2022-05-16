@@ -65,30 +65,34 @@ void main_loop() {
         cout << "Operation No.";
         cin >> operation;
         switch (operation) {
-           case 1: {
+            case 1: {
                 string text;
                 cout << "Enter your text:";
+
                 cin.ignore();
                 getline(cin, text, '\n');
-                add_to_file(mainFile, text);
-
+                add_to_file(mainFile, text, curText.empty());
+                curText = read_file(mainFile);
                 break;
             }
-            case 2:{
-                Display_the_content(mainFile);
+            case 2: {
+                display_file_content(mainFile);
                 break;
             }
-            case 3:{
+            case 3: {
                 empty_file(mainFile);
+                curText.clear();
                 break;
             }
-            case 4:{
-                 Encrypt_file(mainFile);
-                 break;
+            case 4: {
+                curText = encrypt_file(curText);
+                overwrite_file(mainFile, curText);
+                break;
             }
-            case 5 :{
-                 Decrypt_file(mainFile);
-                 break;
+            case 5 : {
+                curText = decrypt_file(curText);
+                overwrite_file(mainFile, curText);
+                break;
             }
             case 6: {
                 string filename2;
@@ -149,25 +153,28 @@ void main_loop() {
             case 12: {
                 curText = text_to_upper(curText);
                 cout << "Text transformed to upper" << endl;
+                overwrite_file(mainFile, curText);
                 break;
             }
             case 13: {
                 curText = text_to_lower(curText);
                 cout << "Text transformed to lower" << endl;
-
+                overwrite_file(mainFile, curText);
                 break;
             }
             case 14: {
                 curText = text_to_camel(curText);
                 cout << "Text transformed to camelcase" << endl;
-
-                break;
-            }
-            case 15: {
                 overwrite_file(mainFile, curText);
                 break;
             }
-
+            case 15: {
+                string filename;
+                cout << "Enter filename:";
+                cin >> filename;
+                overwrite_file(filename, curText);
+                break;
+            }
             case 16: {
                 loop = false;
                 break;
