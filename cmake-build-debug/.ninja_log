@@ -1,0 +1,7 @@
+# ninja log v5
+3	3938	6744090104401978	CMakeFiles/A4_TEditor.dir/files.cpp.obj	6582a2fab493594e
+1	4163	6744090106585982	CMakeFiles/A4_TEditor.dir/editor.cpp.obj	bd81e7aa20f5f755
+4	4623	6744090111265990	CMakeFiles/A4_TEditor.dir/main.cpp.obj	e98edfc58a78698
+4623	4789	6744090112825993	A4_TEditor.exe	c59fd877304a4a75
+3	2555	6744092332675313	CMakeFiles/A4_TEditor.dir/editor.cpp.obj	bd81e7aa20f5f755
+2555	3802	6744092345311335	A4_TEditor.exe	c59fd877304a4a75
