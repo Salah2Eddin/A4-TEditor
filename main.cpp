@@ -85,12 +85,12 @@ void main_loop() {
                 break;
             }
             case 4: {
-                curText = encrypt_file(curText);
+                curText = encrypt_text(curText);
                 overwrite_file(mainFile, curText);
                 break;
             }
             case 5 : {
-                curText = decrypt_file(curText);
+                curText = encrypt_text(curText);
                 overwrite_file(mainFile, curText);
                 break;
             }
